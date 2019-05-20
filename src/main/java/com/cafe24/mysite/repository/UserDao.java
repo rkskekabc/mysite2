@@ -33,6 +33,11 @@ public class UserDao {
 		sqlSession.update("user.update", vo);
 	}
 	
+	public UserVo get(String email) {
+		UserVo userVo = sqlSession.selectOne("user.getByEmail", email);
+		return userVo;
+	}
+	
 	public UserVo get(Long no) {
 		UserVo userVo = sqlSession.selectOne("user.getByNo", no);
 		return userVo;
