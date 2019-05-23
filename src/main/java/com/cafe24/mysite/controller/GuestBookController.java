@@ -17,7 +17,7 @@ public class GuestBookController {
 	@Autowired
 	private GuestBookService guestBookService;
 	
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("list", guestBookService.showList());
 		return "guestbook/list";
@@ -38,6 +38,6 @@ public class GuestBookController {
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String delete(@ModelAttribute GuestBookVo guestBookVo) {
 		guestBookService.delete(guestBookVo);
-		return "redirect:/guestbook";
+		return "redirect:/guestbook/list";
 	}
 }

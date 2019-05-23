@@ -1,14 +1,7 @@
 package com.cafe24.mysite.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +15,6 @@ public class UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Autowired
-	private DataSource dataSource;
-	
 	public UserDao() {
 		System.out.println("UserDao Constructor");
 	}
@@ -34,21 +24,18 @@ public class UserDao {
 	}
 	
 	public UserVo get(String email) {
-		UserVo userVo = sqlSession.selectOne("user.getByEmail", email);
-		return userVo;
+		return sqlSession.selectOne("user.getByEmail", email);
 	}
 	
 	public UserVo get(Long no) {
-		UserVo userVo = sqlSession.selectOne("user.getByNo", no);
-		return userVo;
+		return sqlSession.selectOne("user.getByNo", no);
 	}
 	
 	public UserVo get(String email, String password) throws UserDaoException {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("password", password);
-		UserVo userVo = sqlSession.selectOne("user.getByEmailAndPassword", map);
-		return userVo;
+		return sqlSession.selectOne("user.getByEmailAndPassword", map);
 	}
 	
 	public Boolean insert(UserVo vo) {
