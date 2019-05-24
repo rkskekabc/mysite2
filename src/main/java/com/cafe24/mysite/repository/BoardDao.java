@@ -46,12 +46,11 @@ public class BoardDao {
 		return sqlSession.selectList("board.replySelect", vo);
 	}
 	
-	public void replyInsert(BoardVo vo) {
-		sqlSession.insert("board.replyInsert", vo);
-	}
-	
 	public void replyUpdate(BoardVo vo) {
 		sqlSession.update("board.replyUpdate", vo);
-		System.out.println("dao50-----------");
+	}
+	
+	public void hitUpdate(BoardVo vo) {
+		sqlSession.update("board.hitUpdate", vo);
 	}
 }

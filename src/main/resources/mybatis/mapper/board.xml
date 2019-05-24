@@ -16,7 +16,7 @@
 	
 	<select id="getByNo" parameterType="long" resultType="boardvo">
 		<![CDATA[
-			select a.no, a.title, a.contents, a.user_no as userNo, b.name as userName, 
+			select a.no, a.title, a.contents, a.hit, a.user_no as userNo, b.name as userName, 
 					a.group_no as groupNo, a.order_no as orderNo, a.depth 
 			from board a 
 			join user b on a.user_no = b.no 
@@ -36,7 +36,18 @@
 
 	<insert id="insert" parameterType="boardvo">
 		<![CDATA[
-			insert into board values(null, #{title }, #{contents }, 0, now(), #{groupNo }, 1, 0, #{userNo })
+			insert into board values(null, #{title }, #{contents }, 0, now(), #{groupNo }, 
+		]]>
+			<choose>
+				<when test="orderNo != null">
+					#{orderNo }, #{depth },
+				</when>
+				<otherwise>
+					1, 0,
+				</otherwise>
+			</choose> 
+		<![CDATA[
+			#{userNo })
 		]]>
 	</insert>
 	
@@ -61,15 +72,15 @@
 		]]>
 	</select>
 	
-	<insert id="replyInsert" parameterType="boardvo">
-		<![CDATA[
-			insert into board values(null, #{title }, #{contents }, 0, now(), #{groupNo }, #{orderNo }, #{depth }, #{userNo })
-		]]>
-	</insert>
-	
 	<update id="replyUpdate" parameterType="boardvo">
 		<![CDATA[
 			update board set order_no=#{orderNo } where no=#{no }
+		]]>
+	</update>
+	
+	<update id="hitUpdate" parameterType="boardvo">
+		<![CDATA[
+			update board set hit=#{hit } where no=#{no }
 		]]>
 	</update>
 </mapper>

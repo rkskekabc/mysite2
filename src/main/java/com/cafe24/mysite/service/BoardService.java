@@ -20,6 +20,9 @@ public class BoardService {
 	private BoardDao boardDao;
 	
 	public BoardVo show(Long no) {
+		BoardVo vo = boardDao.get(no);
+		vo.setHit(vo.getHit() + 1);
+		boardDao.hitUpdate(vo);
 		return boardDao.get(no);
 	}
 	
@@ -56,6 +59,6 @@ public class BoardService {
 			updateVo.setOrderNo(updateVo.getOrderNo() + 1);
 			boardDao.replyUpdate(updateVo);
 		}
-		boardDao.replyInsert(vo);
+		boardDao.insert(vo);
 	}
 }
