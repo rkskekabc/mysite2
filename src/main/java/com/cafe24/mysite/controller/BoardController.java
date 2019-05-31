@@ -72,10 +72,21 @@ public class BoardController {
 		return "board/view";
 	}
 	
-	@RequestMapping("/list")
-	public String list(@RequestParam(value="page", defaultValue="0") int currentPage, Model model) {
-		model.addAttribute("list", boardService.showList(currentPage));
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String list(@RequestParam(value="page", defaultValue="0") int currentPage, @RequestParam(value="kwd", defaultValue="") String keyword, Model model) {
+		System.out.println("get list " + keyword);
+		model.addAttribute("list", boardService.showList(currentPage, keyword));
 		model.addAttribute("pager", boardService.getPager());
+		model.addAttribute("keyword", keyword);
+		return "board/list";
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	public String list(@RequestParam(value="kwd", defaultValue="") String keyword, Model model) {
+		System.out.println("post list " + keyword);
+		model.addAttribute("list", boardService.showList(0, keyword));
+		model.addAttribute("pager", boardService.getPager());
+		model.addAttribute("keyword", keyword);
 		return "board/list";
 	}
 	

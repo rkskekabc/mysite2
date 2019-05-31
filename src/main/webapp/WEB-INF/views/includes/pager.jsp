@@ -11,19 +11,19 @@
 				<li>◀</li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${pager.previewPage }">◀</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${pager.previewPage }&kwd=${keyword }">◀</a></li>
 			</c:otherwise>
 		</c:choose>
 		<c:forEach begin="${pager.currentBlock * pager.countPerBlock + 1 }" end="${pager.currentBlock * pager.countPerBlock + pager.countPerBlock }" var="i">
 			<c:choose>
 				<c:when test="${i == pager.currentPage + 1 }">
-					<li class="selected"><a href="${pageContext.servletContext.contextPath }/board/list?page=${i-1 }">${i }</a></li>
+					<li class="selected"><a href="${pageContext.servletContext.contextPath }/board/list?page=${i-1 }&kwd=${keyword }">${i }</a></li>
 				</c:when>
 				<c:when test="${i > pager.totalPageCount }">
 					<li>${i }</li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${i-1 }">${i }</a></li>
+					<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${i-1 }&kwd=${keyword }">${i }</a></li>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
@@ -32,7 +32,7 @@
 				<li>▶</li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${pager.nextPage }">▶</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/board/list?page=${pager.nextPage }&kwd=${keyword }">▶</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

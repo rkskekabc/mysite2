@@ -26,13 +26,14 @@ public class BoardService {
 		return boardDao.get(no);
 	}
 	
-	public List<BoardVo> showList(int currentPage){
-		pager.init(5, 5, boardDao.getCount(), currentPage);
+	public List<BoardVo> showList(int currentPage, String keyword){
+		pager.init(5, 5, boardDao.getCount(keyword), currentPage);
 		int offset = pager.getCurrentPage() * pager.getCountPerPage();
 		int limit = pager.getCountPerPage();
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", offset);
 		map.put("limit", limit);
+		map.put("keyword", keyword);
 		return boardDao.getList(map);
 	}
 	

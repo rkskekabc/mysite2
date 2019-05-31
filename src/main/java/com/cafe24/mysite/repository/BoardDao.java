@@ -18,12 +18,12 @@ public class BoardDao {
 		return sqlSession.selectOne("board.getByNo", no);
 	}
 	
-	public List<BoardVo> getList(Map<String, Integer> map){
+	public List<BoardVo> getList(Map<String, Object> map){
 		return sqlSession.selectList("board.getBoardList", map);
 	}
 	
-	public int getCount() {
-		return sqlSession.selectOne("board.getCount");
+	public int getCount(String keyword) {
+		return sqlSession.selectOne("board.getCount", keyword);
 	}
 	
 	public int getMaxGroupNo() {
