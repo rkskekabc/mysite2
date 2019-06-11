@@ -42,7 +42,8 @@ public class BoardService {
 	}
 	
 	public void write(BoardVo vo) {
-		vo.setGroupNo(boardDao.getMaxGroupNo() + 1);
+		Integer maxGroupNum = boardDao.getMaxGroupNo();
+		vo.setGroupNo(maxGroupNum == null ? 1 : boardDao.getMaxGroupNo() + 1);
 		boardDao.insert(vo);
 	}
 	

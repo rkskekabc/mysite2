@@ -26,7 +26,7 @@ public class GuestBookController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(@ModelAttribute GuestBookVo guestBookVo) {
 		guestBookService.write(guestBookVo);
-		return "redirect:/guestbook";
+		return "redirect:/guestbook/list";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)

@@ -26,7 +26,7 @@ public class BoardDao {
 		return sqlSession.selectOne("board.getCount", keyword);
 	}
 	
-	public int getMaxGroupNo() {
+	public Integer getMaxGroupNo() {
 		return sqlSession.selectOne("board.getMaxGroupNo");
 	}
 	
